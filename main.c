@@ -13,23 +13,24 @@ int main() {
   printf("Enter the level of precision (decimals of precision) to calculate "
          "the square root\n !!! Make sure that the precision is less than 7, "
          "refer to ieee 754 for why!!!");
-  newLine();
   scanf("%d", &precision);
   getSqrt(numberToGetSquareRoot, &sqrt);
   newLine();
   getprecision(&precision);
-  checkPrecision(numberToGetSquareRoot, &sqrt, precision);
+  while (checkPrecision(numberToGetSquareRoot, &sqrt, precision)) {
+    getSqrt(numberToGetSquareRoot, &sqrt);
+  }
+
   printf("The square root of the number %d is %.2f", numberToGetSquareRoot,
          sqrt);
 }
 
-int checkPrecision(int a, float *sqrt, int precision) {
+int checkPrecision(int originalNumber, float *sqrt, int precision) {
   int numberToCompareWithPrecision = (int)(*sqrt) * precision * (*sqrt);
-  newLine();
-  printf("num to compare: %d", numberToCompareWithPrecision);
-  int originalNumberWithPrecision = a * precision;
-  newLine();
-  printf("num to orginal Number: %d", originalNumberWithPrecision);
+  // test case: printf("num to compare: %d", numberToCompareWithPrecision);
+  int originalNumberWithPrecision = originalNumber * precision;
+  // test caase: printf("num to orginal Number: %d",
+  // originalNumberWithPrecision);
   return numberToCompareWithPrecision == originalNumberWithPrecision ? 0 : 1;
 }
 void getprecision(int *precision) {
@@ -38,7 +39,6 @@ void getprecision(int *precision) {
   for (int i = 1; i <= temp; i++) {
     (*precision) *= 10;
   }
-  newLine();
-  printf("precision is: %d", *precision);
+  // test case: printf("precision is: %d", *precision);
 }
-void getSqrt(int a, float *sqrt) {}
+void getSqrt(int originalNumber, float *sqrt) {}
